@@ -9,22 +9,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/board")
 public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
-	@RequestMapping("/add")
+	@RequestMapping("/board_add")
 	public String boardWrite() {
 		logger.info("Board Write");
 		return "auth:board/board_write.tiles";
 	}
-	@RequestMapping("/list")
+	@RequestMapping("/board_list")
 	public String boardList() {
 		logger.info("Board LIST");
 		return "auth:board/board_list.tiles";
 	}
-	@RequestMapping("/update")
+	@RequestMapping("/board_update")
 	public String boardUpdate() {
 		logger.info("Board Update");
 		return "auth:board/board_update.tiles";
 	}
-	@RequestMapping("/detail")
+	@RequestMapping("/board_detail")
 	public String boardDetail() {
 		logger.info("Board Detail");
 		return "auth:board/board_detail.tiles";

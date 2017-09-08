@@ -57,17 +57,41 @@ app.main=(function(){
 	var onCreate=function(){
 		setContentView();
 		$('.list-group a').eq(0).on('click',function(){
-			app.controller.moveTo('member','add');
+			app.controller.moveTo('member','member_add');
 		 })
-		 $('.list-group a').eq(1).on('click',function(){
-			 app.controller.list('member','member_list','1');
-		 })
-		 $('.list-group a').eq(2).on('click',function(){
-			 app.controller.detailStudent(prompt('조회 ID'));
-		 })
-		 $('.list-group a').eq(3).on('click',function(){
-			 app.controller.deleteTarget('이름');
-		 })
+		$('.list-group a').eq(1).on('click',function(){
+			app.controller.list('member','member_list','1');
+		})
+		$('.list-group a').eq(2).on('click',function(){
+			app.controller.detailStudent(prompt('ID 입력'));
+		})
+		$('.list-group a').eq(3).on('click',function(){
+			app.controller.deleteTarget('이름');
+		})
+		$('.list-group a').eq(4).on('click', function(){
+			app.controller.moveTo('grade','grade_add');
+		})
+		$('.list-group a').eq(5).on('click', function(){
+			app.controller.list('grade','grade_list','1');
+		})
+		$('.list-group a').eq(6).on('click', function(){
+			alert('detailGrade');
+		})
+		$('.list-group a').eq(7).on('click',function(){
+			app.controller.deleteTarget('이름');
+		})
+		$('.list-group a').eq(8).on('click',function(){
+			app.controller.moveTo('board', 'board_add');
+		})
+		$('.list-group a').eq(9).on('click',function(){
+			app.controller.list('board','board_list','1');
+		})
+		$('.list-group a').eq(10).on('click',function(){
+			alert('detailBoard');
+		})
+		$('.list-group a').eq(11).on('click',function(){
+			app.controller.deleteTarget('번호');
+		})
 	};
 	var setContentView=function(){
 		 var $u1 = $("#main_ul_stu");
@@ -94,7 +118,7 @@ app.auth=(function(){
 				return false;
 			}
 			if($('#input_pass').val()===""){
-				alert('PASS 를 입력해 주세요');
+				alert('PASS를 입력해 주세요');
 				return false;
 			}
 			$('#login_box').attr('action',app.path.ctx()+"/auth/login");
@@ -114,17 +138,41 @@ app.navbar=(function(){
 	var onCreate=function(){
 		setContentView();
 		$('.dropdown-menu a').eq(0).on('click',function(){
-			app.controller.moveTo('member','add');
-		 })
-		 $('.dropdown-menu a').eq(1).on('click',function(){
+			app.controller.moveTo('member','member_add');
+		})
+		$('.dropdown-menu a').eq(1).on('click',function(){
 			 app.controller.list('member','member_list','1');
-		 })
-		 $('.dropdown-menu a').eq(2).on('click',function(){
-			 app.controller.detailStudent(prompt('조회 ID'));
-		 })
-		 $('.dropdown-menu a').eq(3).on('click',function(){
+		})
+		$('.dropdown-menu a').eq(2).on('click',function(){
+			 app.controller.detailStudent(prompt('ID 입력'));
+		})
+		$('.dropdown-menu a').eq(3).on('click',function(){
 			 app.controller.deleteTarget('이름');
-		 })	
+		})	
+		$('.dropdown-menu a').eq(4).on('click', function(){
+			app.controller.moveTo('grade','grade_add');
+		})
+		$('.dropdown-menu a').eq(5).on('click', function(){
+			app.controller.list('grade','grade_list','1');
+		})
+		$('.dropdown-menu a').eq(6).on('click', function(){
+			alert('detailGrade');
+		})
+		$('.dropdown-menu a').eq(7).on('click',function(){
+			app.controller.deleteTarget('이름');
+		})
+		$('.dropdown-menu a').eq(8).on('click',function(){
+			app.controller.moveTo('board','board_add');
+		})
+		$('.dropdown-menu a').eq(9).on('click',function(){
+			app.controller.list('board','board_list','1');
+		})
+		$('.dropdown-menu a').eq(10).on('click',function(){
+			alert('detailBoard');
+		})
+		$('.dropdown-menu a').eq(11).on('click',function(){
+			app.controller.deleteTarget('번호');
+		})
 	};
 	var setContentView=function(){
 		 var $u1 = $("#navbar_ul_stu");
@@ -185,6 +233,7 @@ app.controller=(function(){
 	var init=function(){
 	};
 	var moveTo=function(dir,page){
+		alert('가야될 경로 : '+dir+" 페이지 : "+page);
 		location.href=app.path.ctx()+'/'+dir+"/"+page;
 	};
 	var list=function(dir,page,pageNumber){
@@ -194,8 +243,7 @@ app.controller=(function(){
 		prompt(target+'의 ID?');
 	};
 	var detailStudent=function(id){
-		alert('click');
-		location.href=app.path.ctx()+"/member/detail";
+		location.href=app.path.ctx()+"/member/member_detail"+"&id="+id;
 	};
 	
 	return {

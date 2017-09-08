@@ -7,6 +7,6 @@
   		someone@hanbit.com</a>.</p>
 	</div>
 </footer>
-</div>
+
 </body>
 </html>
