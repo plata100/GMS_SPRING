@@ -1,4 +1,4 @@
-package com.gms.web.member;
+package com.gms.web.grade;
 
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -13,5 +13,4 @@ public class MajorDTO {
 	public String toString() {
 		return "MajorBean [majorId=" + majorId + ", title=" + title + ", id=" + id + ", subjId=" + subjId + "]";
 	}
-
 }
