@@ -126,6 +126,14 @@ VALUES('c','c언어','computer');
 INSERT INTO Subject(subj_id,title,major_id)
 VALUES('java','자바','computer');
 INSERT INTO Subject(subj_id,title,major_id)
+VALUES('html','HTML','computer');
+INSERT INTO Subject(subj_id,title,major_id)
+VALUES('css','CSS','computer');
+INSERT INTO Subject(subj_id,title,major_id)
+VALUES('javascript','스크립트','computer');
+INSERT INTO Subject(subj_id,title,major_id)
+VALUES('sql','SQL','computer');
+INSERT INTO Subject(subj_id,title,major_id)
 VALUES('python','파이썬','computer');
 INSERT INTO Subject(subj_id,title,major_id)
 VALUES('genetics ','유전학','biology');

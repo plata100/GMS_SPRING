@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <div id="container">
+	<div style="text-align:center; width:100%; height:50px;">
+		<h4 style="font-size:20px; color:red;">${message}</h4>
+	</div>
 	<form id="join_form" action="member_detail.jsp" method="get">
 		<fieldset>
 		<legend>관리자 등록</legend>

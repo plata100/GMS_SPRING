@@ -60,10 +60,10 @@ app.main=(function(){
 			app.controller.moveTo('member','member_add');
 		 })
 		$('.list-group a').eq(1).on('click',function(){
-			app.controller.list('member','member_list','1');
+			app.member.list('1');
 		})
 		$('.list-group a').eq(2).on('click',function(){
-			app.controller.detailStudent(prompt('ID 입력'));
+			app.member.detailStudent(prompt('ID 입력'))
 		})
 		$('.list-group a').eq(3).on('click',function(){
 			app.controller.deleteTarget('이름');
@@ -72,7 +72,7 @@ app.main=(function(){
 			app.controller.moveTo('grade','grade_add');
 		})
 		$('.list-group a').eq(5).on('click', function(){
-			app.controller.list('grade','grade_list','1');
+			alert('app.grade.list();');
 		})
 		$('.list-group a').eq(6).on('click', function(){
 			alert('detailGrade');
@@ -84,7 +84,7 @@ app.main=(function(){
 			app.controller.moveTo('board', 'board_add');
 		})
 		$('.list-group a').eq(9).on('click',function(){
-			app.controller.list('board','board_list','1');
+			alert('app.board.list();');
 		})
 		$('.list-group a').eq(10).on('click',function(){
 			alert('detailBoard');
@@ -141,10 +141,10 @@ app.navbar=(function(){
 			app.controller.moveTo('member','member_add');
 		})
 		$('.dropdown-menu a').eq(1).on('click',function(){
-			 app.controller.list('member','member_list','1');
+			app.member.list('1');
 		})
 		$('.dropdown-menu a').eq(2).on('click',function(){
-			 app.controller.detailStudent(prompt('ID 입력'));
+			app.member.detailStudent(prompt('ID 입력'))
 		})
 		$('.dropdown-menu a').eq(3).on('click',function(){
 			 app.controller.deleteTarget('이름');
@@ -153,7 +153,7 @@ app.navbar=(function(){
 			app.controller.moveTo('grade','grade_add');
 		})
 		$('.dropdown-menu a').eq(5).on('click', function(){
-			app.controller.list('grade','grade_list','1');
+			alert("app.grade.list()");
 		})
 		$('.dropdown-menu a').eq(6).on('click', function(){
 			alert('detailGrade');
@@ -165,7 +165,7 @@ app.navbar=(function(){
 			app.controller.moveTo('board','board_add');
 		})
 		$('.dropdown-menu a').eq(9).on('click',function(){
-			app.controller.list('board','board_list','1');
+			alert("app.board.list()");
 		})
 		$('.dropdown-menu a').eq(10).on('click',function(){
 			alert('detailBoard');
@@ -186,30 +186,56 @@ app.navbar=(function(){
 		init : init
 	};
 })();
-
 app.member=(function(){
 	var init=function(){
 		onCreate();
-		
 	};
 	var onCreate=function(){
 		setContentView();
-		$('#updateBtn').on('click',function(){
-		//	id,phone,email,title;
-			sessionStorage.setItem('id',$('#detail_id').text());
-			sessionStorage.setItem('phone',$('#detail_phone').text());
-			sessionStorage.setItem('email',$('#detail_email').text());
-			sessionStorage.setItem('title',$('#detail_title').text());
-			controller.moveTo('member','member_update');
-		});
-		
+		addStudent();
+		updateStudent();
 	};
 	var setContentView=function(){
 		
 	};
-	
+	var list=function(pageNumber){
+		location.href=app.path.ctx()+'/member/list/'+pageNumber;
+	};
+	var addStudent=function() {
+		$('#join_yes_btn').on('click',function() {
+			$('#join_form').attr('method','post');
+			$('#join_form').attr('action',app.path.ctx()+'/member/add');
+		});
+	};
+	var searchStudent=function (){
+		var search=$('#search').val();
+		if(search==="") {
+			alert('검색어를 입력해주세요');
+			return false;
+		}
+		location.href=app.path.ctx()+"/member/search/"+search;
+	};
+	var detailStudent=function(id){
+		alert(id);
+		location.href=app.path.ctx()+'/member/detail/'+id;
+	};
+	var updateStudent=function() {
+		$('#confirmBtn').on('click',function(){
+			alert('update 실행');
+			$('#member_update_box').attr('method','post');
+			$('#member_update_box').attr('action',app.path.ctx()+'/student/update');
+		});
+	}
+	var deleteStudent=function(id,pageNumber) {
+		alert(id);
+		location.href=app.path.ctx()+'/member/delete/'+id+'/'+pageNumber;
+	};
 	return {
-		init : init
+		init : init,
+		list : list,
+		searchStudent : searchStudent,
+		detailStudent : detailStudent,
+		deleteStudent : deleteStudent
 	};
 })();
 app.grade=(function(){
@@ -234,23 +260,14 @@ app.controller=(function(){
 	};
 	var moveTo=function(dir,page){
 		alert('가야될 경로 : '+dir+" 페이지 : "+page);
-		location.href=app.path.ctx()+'/'+dir+"/"+page;
-	};
-	var list=function(dir,page,pageNumber){
-		location.href=app.path.ctx()+'/'+dir+"/"+page+"&pageNumber="+pageNumber;
+		location.href=app.path.ctx()+'/common/path/'+dir+"/"+page;
 	};
 	var deleteTarget=function (target){
 		prompt(target+'의 ID?');
 	};
-	var detailStudent=function(id){
-		location.href=app.path.ctx()+"/member/member_detail"+"&id="+id;
-	};
-	
 	return {
 		init : init,
 		moveTo : moveTo,
-		deleteTarget : deleteTarget,
-		detailStudent : detailStudent,
-		list : list
+		deleteTarget : deleteTarget
 	};
 })();

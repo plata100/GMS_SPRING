@@ -212,7 +212,7 @@ AS
     a.phone phone,
     a.email email,
     a.password pass,
-    GROUP_CONCAT(s.title,',') subjects
+    GROUP_CONCAT(s.title) subjects
   FROM 
     Member a
       LEFT  JOIN Major m

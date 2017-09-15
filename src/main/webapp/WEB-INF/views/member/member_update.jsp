@@ -3,19 +3,19 @@
 	<div class="row main">
 		<div class="panel-heading">
               <div class="panel-title text-center">
-              		<h1 id="update_id" class="title" ></h1>
+              		<h1 id="update_id" class="title" >${student.id}의 정보 수정</h1>
               		<hr />
               	</div>
            </div> 
 		<div class="main-login main-center">
-			<form class="form-horizontal" method="post" action="#">
-				
+			<form id="member_update_box" class="form-horizontal">
+				<input id="id" name="id" type="hidden" value="${student.id}">
 				<div class="form-group">
-					<label for="name" class="cols-sm-2 control-label">${requestScope.student.id}</label>
+					<label for="name" class="cols-sm-2 control-label">Name</label>
 					<div class="cols-sm-10">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-							<input id="name" name="name"  type="text" class="form-control" placeholder=""/>
+							<input id="name" name="name"  type="text" class="form-control" value="${student.name}" readonly/>
 						</div>
 					</div>
 				</div>
@@ -25,7 +25,7 @@
 					<div class="cols-sm-10">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-							<input id="email" name="email"  type="text" class="form-control" placeholder=""/>
+							<input id="email" name="email"  type="text" class="form-control" value="${student.email}"/>
 						</div>
 					</div>
 				</div>
@@ -35,7 +35,7 @@
 					<div class="cols-sm-10">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-							<input id="phone" name="phone"  type="text" class="form-control"   placeholder=""/>
+							<input id="phone" name="phone"  type="text" class="form-control" value="${student.phone}"/>
 						</div>
 					</div>
 				</div>
@@ -64,12 +64,12 @@
 				</div>
 
 				<div class="form-group ">
-					<button id="confirmBtn" type="button" class="btn btn-primary btn-lg btn-block login-button">UPDATE</button>
+					<button id="confirmBtn" type="submit" class="btn btn-primary btn-lg btn-block login-button">입력</button>
 				</div>
 			</form>
 		</div>
 	</div>
 </div>
 <script>
-memberUpdate.init();
+app.member.init();
 </script>
