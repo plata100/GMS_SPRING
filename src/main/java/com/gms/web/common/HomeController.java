@@ -24,5 +24,4 @@ public class HomeController {
 		model.addAttribute("path", PathFactory.create());
 		return "public:common/home.tiles";
 	}
-	
 }
