@@ -14,7 +14,7 @@ public class PathFactory {
 		path.setCtx(
 			((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
 			.getRequest().getContextPath()
-				);
+			);
 		path.setImg(path.getCtx()+"/resources/img");
 		path.setCss(path.getCtx()+"/resources/css");
 		path.setJs(path.getCtx()+"/resources/js");

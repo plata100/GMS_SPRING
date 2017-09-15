@@ -22,7 +22,7 @@ public class HomeController {
 		logger.info("Home");
 		model.addAttribute("serverTime",new SimpleDateFormat("yyyy년MM월dd일 HH시mm분ss초").format(new Date()));
 		model.addAttribute("path", PathFactory.create());
-		return "public:common/home.tiles";
+		return "index";
 	}
 	
 }
