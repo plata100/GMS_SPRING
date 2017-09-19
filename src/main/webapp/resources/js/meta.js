@@ -51,7 +51,7 @@ meta.algo={
 		var start=s*1;
 		var end=e*1;
 		for(var i=start;i<=end;i++){
-			sum+=i;
+			sum=sum+i;
 		}
 		return sum;
 	},
@@ -61,12 +61,12 @@ meta.algo={
 		var i=0;
 		var sw=0;
 		do{
-			i++;
+			i=i+1;
 			if(sw==0) {
-				sum+=i;
+				sum=sum+i;
 				sw=1;
 			} else {
-				sum-=i;
+				sum=sum-i;
 				sw=0;
 			}
 		} while(i<100);
@@ -79,8 +79,8 @@ meta.algo={
 		var limit=x*1;
 		do {
 			i++;
-			j+=i;
-			sum+=j;
+			j=j+i;
+			sum=sum+j;
 		} while (i<limit);
 		return sum;
 	},
@@ -88,9 +88,9 @@ meta.algo={
 		var i=1, j=1, sum=1;
 		var limit=x*1;
 		do {
-			i++;
-			j*=i;
-			sum+=j;
+			i=i+1;
+			j=j*i;
+			sum=sum+j;
 		} while(i<limit);
 		return sum;
 	},
@@ -100,7 +100,7 @@ meta.algo={
 		var limit=x*1;
 		hap=2;
 		cnt=2;
-		while(1) {
+		while(true) {
 			c=a+b;
 			hap+=c;
 			cnt++;
@@ -230,7 +230,7 @@ meta.navbar=(function(){
 		$('#facBtn').click(()=>{
 			$('#container').empty();
 			meta.ui.series();
-			$('h1').html('DifferenceSeries의 합');
+			$('h1').html('FactorialSeries의 합');
 			$('#start').val('1').attr('readonly','true');
 			$('#resultBtn').click(()=>{
 				$('#result').text('결과 : '+meta.algo.factorialSeries($('#end').val()));;
