@@ -7,10 +7,10 @@
 .index-ul>li{border: 1px solid black;}
 .index-ul>li>a{text-decoration: none;} 
 /*login.html*/
-#login_id{color:blue;display:inline-block;font-size: 30px;width: 160px;}
-#login_pass{color:blue;font-size: 30px}
-#login_btn{background-color: blue;color: white;width: 160px;height:50px;}
-#cancel_btn{background-color: red;color: white;width: 160px;height:50px;}
+#login_id{color:blue;display:inline-block;font-size: 30px;width: 200px;}
+#login_pass{color:blue;display:inline-block;font-size: 30px;width: 200px;}
+#login_btn{background-color: blue;color: white;width: 100px;height:30px;}
+#cancel_btn{background-color: red;color: white;width: 100px;height:30px;}
 #login_box{width:400px;margin:0 auto;}
 /*join.html*/
 #join_item{width: 100px; display: inline-block;}
