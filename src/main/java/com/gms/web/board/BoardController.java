@@ -37,12 +37,10 @@ public class BoardController {
 		IListService listService=null;
 		switch(cate) {
 			case "board":
-				cmd=null;
-				/*listService=(x) -> {
+				cmd=null;listService=(x) -> {
 					return boardMapper.selectSome(cmd);
 				};
-				map.put("list", listService.execute(cmd));*/
-				map.put("msg", "Hello AJAX!!");
+				map.put("list", listService.execute(cmd));
 				break;
 			case "grade":
 				cmd=null;

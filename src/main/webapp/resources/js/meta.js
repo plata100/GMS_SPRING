@@ -40,21 +40,33 @@ meta.index=(()=>{
 			$('#hBtn').append(compUI.span('btn2')).attr('display','inline');
 			$('#btn2').html('로그인').addClass('label label-primary').css({'margin-left':'10px'});
 			$('#btn2').click(()=>{
+				meta.navbar.init();
 				$container.empty();
 				meta.auth.init();
-				alert('게시판 가기');
 			});
 			
 			compUI.span('bbsBtn').html('게시판 관리').addClass('label label-danger').css({'margin-left':'10px'}).appendTo($hBtn)
 			.click(()=>{
-				$('#container').empty();
-				meta.navbar.init();
-				$('#container').append(bbsUI.list()).css({'width':'100%'});
+				alert('게시판 가기');
+				$content.empty();
 				
-				var url=ctx+'/get/board/list';
-				$.getJSON(url,x=>{
-					
+				$.getJSON(ctx+'/get/board/list',data=>{
+					var tbl=bbsUI.tbl();
+					var tr='';
+					$.each(data.list,function(i,j){
+						tr+= '<tr style="height:25px;">'
+							+'<td>'+j.articleSeq+'</td>'
+							+'<td>'+j.id+'</td>'
+							+'<td>'+j.title+'</td>'
+							+'<td>'+j.content+'</td>'
+							+'<td>'+j.regdate+'</td>'
+							+'<td>'+j.hitcount+'</td>'
+							+'</tr>';
+					});
+					$content.html(tbl);
+					$('#tbody').html(tr);
 				});
+				
 			});
 		});
 	};

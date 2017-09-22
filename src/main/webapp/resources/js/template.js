@@ -90,38 +90,21 @@ var introUI={
 };
 
 var bbsUI={
-	list : ()=> {
-		compUI.div('content').css({'width':'100%'});
-		$('#content').css({'width':'70%','margin':'0 auto'});
-		compUI.table('list-table').attr('border','1').css({'border-collapse':'collapse','width':'100%'}).appendTo($('#content'));
-		for(var i=0; i<5; i++) {
-			compUI.tr('list-tr-'+i).css({'height':'25px'}).appendTo($('#list-table'));
-			if(i==0) {
-				for(var j=0; j<5; j++) {
-					compUI.th('list-th-'+j).css({'text-align':'center'}).appendTo($('#list-tr-0'));	
-				}
-				$('#list-th-0').html('No').css({'width':'10%'});
-				$('#list-th-1').html('제목').css({'width':'40%'});
-				$('#list-th-2').html('글쓴이').css({'width':'15%'});
-				$('#list-th-3').html('작성날짜').css({'width':'25%'});
-				$('#list-th-4').html('조회수').css({'width':'10%'});
-			} else {
-				for(var j=0; j<5; j++) {
-					compUI.th('list-th-'+j).css({'text-align':'center'}).appendTo($('#list-tr-'+i));
-				}
-			}
-		}
-		$('#list-table').after(compUI.nav('pagi-nav').attr('aria-label','Page navigation').css({width:'400px',margin:'0 auto'}));
-		compUI.ul('pagi-ui').addClass('pagination').appendTo($('#pagi-nav'));
-		for(var i=0; i<5; i++) {
-			compUI.li('pagi-ui-li-'+i).appendTo($('#pagi-ui'));
-			$('#pagi-ui-li-'+i).append(compUI.a('pagi-ui-li-a-'+i));
-		};
-		compUI.span('pagi-ui-li-a-0-span').addClass('glyphicon glyphicon-step-backward').attr('aria-hidden','true').appendTo($('#pagi-ui-li-a-0'));
-		compUI.span('pagi-ui-li-a-1-span').addClass('glyphicon glyphicon-chevron-left').attr('aria-hidden','true').appendTo($('#pagi-ui-li-a-1'));
-		compUI.span('pagi-ui-li-a-2-span').appendTo($('#pagi-ui-li-a-2'));
-		compUI.span('pagi-ui-li-a-3-span').addClass('glyphicon glyphicon-chevron-right').attr('aria-hidden','true').appendTo($('#pagi-ui-li-a-3'));
-		compUI.span('pagi-ui-li-a-4-span').addClass('glyphicon glyphicon-step-forward').attr('aria-hidden','true').appendTo($('#pagi-ui-li-a-4'));		
+	tbl : ()=> {
+		var tbl='<table id="tbl" border=1 style="border-collapse: collapse; width:100%;"><thead><tr style="height:25px;">'
+		var a=[{width:'5%',txt:'NO'},
+			{width:'20%',txt:'제목'},
+			{width:'36%',txt:'내용'},
+			{width:'15%',txt:'글쓴이'},
+			{width:'15%',txt:'작성일'},
+			{width:'9%',txt:'조회수'}];
+		$.each(a,(i,j)=>{
+			tbl+='<th style="width:'+j.width
+			+'; text-align:center;">'+j.txt+'</th>'
+		});
+		tbl+='</tr></thead><tbody id="tbody">'
+		tbl+='</tbody></table>';
+		return tbl;
 	}
 }
 
