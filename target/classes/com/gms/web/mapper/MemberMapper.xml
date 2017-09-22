@@ -29,20 +29,20 @@
 		)
 	</insert>
 
-	<select id="count" resultType="String" parameterType="com.gms.web.command.CommandDTO">
+	<select id="count" resultType="String" parameterType="com.gms.web.command.Command">
 		SELECT COUNT(*) AS count FROM Member
 	</select>
-	<select id="login" resultType="com.gms.web.member.MemberDTO" parameterType="com.gms.web.command.CommandDTO">
+	<select id="login" resultType="com.gms.web.member.MemberDTO" parameterType="com.gms.web.command.Command">
 		SELECT member_id AS id, name, password, ssn, regdate, phone, email, profile 
 			FROM MEMBER WHERE member_id = #{search}
 	</select>
-	<select id="selectAll" resultType="com.gms.web.member.StudentDTO" parameterType="com.gms.web.command.CommandDTO">
+	<select id="selectAll" resultType="com.gms.web.member.StudentDTO" parameterType="com.gms.web.command.Command">
 		SELECT t.num, t.*
 		  FROM (SELECT @rownum:=@rownum+1 num, s.*
 		  		  FROM (SELECT @rownum:=0) b, Student s) t
 		WHERE t.num between #{startRow} and #{endRow}
 	</select>
-	<select id="selectById" resultType="com.gms.web.member.StudentDTO" parameterType="com.gms.web.command.CommandDTO">
+	<select id="selectById" resultType="com.gms.web.member.StudentDTO" parameterType="com.gms.web.command.Command">
 		SELECT id,name,ssn,regdate,phone,email,pass,subjects
 		  FROM Student
 		 WHERE id = #{search}
@@ -52,7 +52,7 @@
 		SET email = #{email}, phone = #{phone}, password= #{password}
 		WHERE member_id = #{id}
 	</update>
-	<delete id="delete" parameterType="com.gms.web.command.CommandDTO">
+	<delete id="delete" parameterType="com.gms.web.command.Command">
 		DELETE FROM Member
 			WHERE member_id = #{search}
 	</delete>

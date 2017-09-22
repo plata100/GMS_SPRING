@@ -8,7 +8,7 @@ import com.gms.web.constant.*;
 import lombok.Data;
 
 @Lazy @Component @Data
-public class CommandDTO implements Commandable{
+public class Command implements Commandable{
 	protected String action,pageNumber,column;
 	protected String startRow,endRow,view,page,dir,search;
 	public void setPageNumber(String pageNumber){

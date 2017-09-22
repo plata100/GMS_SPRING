@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.gms.web.command.CommandDTO;
+import com.gms.web.command.Command;
 import com.gms.web.grade.MajorDTO;
 import com.gms.web.mapper.GradeMapper;
 import com.gms.web.mapper.MemberMapper;
@@ -20,7 +20,7 @@ public class MemberServiceImpl implements MemberService {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	@Autowired MemberMapper mapper;
 	@Autowired GradeMapper gMapper;
-	@Autowired CommandDTO cmd;
+	@Autowired Command cmd;
 	@Autowired MajorDTO major;
 	@Autowired MemberDTO member;
 	
@@ -36,22 +36,22 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<?> list(CommandDTO cmd) {
+	public List<?> list(Command cmd) {
 		return mapper.selectAll(cmd);
 	}
 
 	@Override
-	public StudentDTO findById(CommandDTO cmd) {
+	public StudentDTO findById(Command cmd) {
 		return mapper.selectById(cmd);
 	}
 
 	@Override
-	public List<?> findByName(CommandDTO cmd) {
+	public List<?> findByName(Command cmd) {
 		return null; // MemberDAOImpl.getInstance().selectByName(cmd);
 	}
 	
 	@Override
-	public String count(CommandDTO cmd) {
+	public String count(Command cmd) {
 		logger.info("count is {}", "entered");
 		String count=mapper.count(cmd);
 		logger.info("count is {}", count);
@@ -64,7 +64,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override @Transactional
-	public int remove(CommandDTO cmd) {
+	public int remove(Command cmd) {
 		int rs=0;
 		mapper.delete(cmd);
 		gMapper.deleteMajor(cmd);
@@ -72,7 +72,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public Map<String,Object> login(CommandDTO cmd) {
+	public Map<String,Object> login(Command cmd) {
 		Map<String,Object> map = new HashMap<>();
 		member=mapper.login(cmd);
 		String page="", message="";

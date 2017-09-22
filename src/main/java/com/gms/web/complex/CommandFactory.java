@@ -7,8 +7,8 @@ import com.gms.web.constant.Action;
 
 @Component
 public class CommandFactory {
-	public static CommandDTO createCommand(String dir,String action,String page,String pageNumber,String column,String search){
-		CommandDTO cmd = null;
+	public static Command createCommand(String dir,String action,String page,String pageNumber,String column,String search){
+		Command cmd = null;
 		if(action==null){
 			action=Action.MOVE;
 		}

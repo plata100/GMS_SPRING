@@ -1,72 +1,87 @@
 var meta=meta || {};
-meta.common=(function(){
+meta.common=(()=>{
 	var init=function(ctx){
 		onCreate();
 		meta.session.init(ctx);
 		meta.index.init();
 	};
-	var onCreate=function(){
+	var onCreate=()=>{
 		
 	};
 	return { init:init };
 })();
-meta.index=(function(){
-	var $navbar,$container,img,js,css;
+meta.index=(()=>{
+	var $navbar,$container,img,js,ctx;
 	var temp;
-	var init=function(){
+	var init=()=>{
 		js=$$('j');
 		temp=js+'/template.js';
 		algo=js+'/algo.js';
-		onCreate();
-	};
-	var onCreate=function(){
 		$container=$('#container');
 		img=$$('i');
-		$.getScript(temp,(x,y)=>{
-			$container.append(compUI.div('content')).css({'width':'100%'});
-			$('#content').css({width:'50%',margin:'0 auto'});
-			$('#content').append(compUI.image('loading',img+'/loading.gif'));
-			$('#loading').after(compUI.h1('h-btn'));
-			$('#h-btn').append(compUI.span('btn')).attr('display','inline');
-			$('#btn').html('알고리즘').addClass('label label-default');
-			$('#h-btn').append(compUI.span('btn2')).attr('display','inline');
-			$('#btn2').html('로그인').addClass('label label-primary').css({'margin-left':'10px'});
-			$('#h-btn').append(compUI.span('btn3')).attr('display','inline');
-			$('#btn3').html('게시판').addClass('label label-danger').css({'margin-left':'10px'});
-			$('#btn').click(()=>{
+		ctx=$$('x');
+		onCreate();
+	};
+	var onCreate=()=>{
+		$.getScript(temp,()=>{
+			compUI.div('content').css({'width':'100%'}).appendTo($container);
+			$content=$('#content');
+			
+			compUI.image('loading',img+'/loading.gif').css({width:'40%',margin:'0 auto'}).appendTo($content);
+			compUI.h1('hBtn').attr('display','inline').appendTo($content);
+			$hBtn=$('#hBtn');
+			
+			compUI.span('algoBtn').html('알고리즘').addClass('label label-default').appendTo($hBtn)
+			.click(()=>{
 				$container.empty();
 				meta.navbar.init();
 			});
+			
+			$('#hBtn').append(compUI.span('btn2')).attr('display','inline');
+			$('#btn2').html('로그인').addClass('label label-primary').css({'margin-left':'10px'});
 			$('#btn2').click(()=>{
 				$container.empty();
-				meta.auth.init();	
+				meta.auth.init();
+				alert('게시판 가기');
+			});
+			
+			compUI.span('bbsBtn').html('게시판 관리').addClass('label label-danger').css({'margin-left':'10px'}).appendTo($hBtn)
+			.click(()=>{
+				$('#container').empty();
+				meta.navbar.init();
+				$('#container').append(bbsUI.list()).css({'width':'100%'});
+				
+				var url=ctx+'/get/board/list';
+				$.getJSON(url,x=>{
+					
+				});
 			});
 		});
 	};
 	return {init:init};
 })();
-meta.auth=(function(){
+meta.auth=(()=>{
 	var $container,img,js,temp;
-	var init=function(){
+	var init=()=>{
 		js=$$('j');
 		temp=js+'/template.js';
 		loginView();
 	};
-	var loginView=function(){
+	var loginView=()=>{
 		$container=$('#container');
 		img=$$('i');
 		$.getScript(temp,()=>{
 			$container.append(compUI.div('content')).css({'width':'100%'});
 			$('#content').css({width:'50%',margin:'0 auto'});
 			$('#content').append(introUI.login(img));
-			$('#input_pass').after(compUI.h1('h-btn'));
-			$('#h-btn').append(compUI.span('login_btn'));
+			$('#input_pass').after(compUI.h1('hBtn'));
+			$('#hBtn').append(compUI.span('login_btn'));
 			$('#login_btn').html('로그인').addClass('label label-primary');
-			$('#h-btn').append(compUI.span('cancel_btn'));
+			$('#hBtn').append(compUI.span('cancel_btn'));
 			$('#cancel_btn').html('취소').addClass('label label-danger').css({'margin-left':'20px'});
 		});
 	};
-	var joinView=function(){
+	var joinView=()=>{
 		
 	};
 	return {
@@ -75,52 +90,52 @@ meta.auth=(function(){
 		joinView : joinView
 	};
 })();
-meta.navbar=(function(){
+meta.navbar=(()=>{
 	var js,algo,temp;
-	var init=function(){
+	var init=()=>{
 		js=$$('j');
 		algo=js+'/algo.js';
 		temp=js+'/template.js';
 		onCreate();
 	};
-	var onCreate=function(){
+	var onCreate=()=>{
 		$.getScript(temp,()=> {
 			$('#navbar').html(introUI.navbar());
 			
-			$('.dropdown-menu a').eq(0).on('click',function(){
+			$('.dropdown-menu a').eq(0).on('click',()=>{
 				app.controller.moveTo('member','member_add');
 			});
-			$('.dropdown-menu a').eq(1).on('click',function(){
+			$('.dropdown-menu a').eq(1).on('click',()=>{
 				app.member.list(1);
 			});
-			$('.dropdown-menu a').eq(2).on('click',function(){
+			$('.dropdown-menu a').eq(2).on('click',()=>{
 				app.controller.moveTo('member','member_detail');
 			});
-			$('.dropdown-menu a').eq(3).on('click',function(){
-				
+			$('.dropdown-menu a').eq(3).on('click',()=>{
+				alert('학생삭제');
 			});
-			$('.dropdown-menu a').eq(4).on('click',function(){
+			$('.dropdown-menu a').eq(4).on('click',()=>{
 				app.controller.moveTo('grade','grade_add');
 			});
-			$('.dropdown-menu a').eq(5).on('click',function(){
+			$('.dropdown-menu a').eq(5).on('click',()=>{
 				app.controller.moveTo('hong','grade','grade_list');
 			});
-			$('.dropdown-menu a').eq(6).on('click',function(){
+			$('.dropdown-menu a').eq(6).on('click',()=>{
 				app.controller.moveTo('grade','grade_detail');
 			});
-			$('.dropdown-menu a').eq(7).on('click',function(){
+			$('.dropdown-menu a').eq(7).on('click',()=>{
 				
 			});
-			$('.dropdown-menu a').eq(8).on('click',function(){
+			$('.dropdown-menu a').eq(8).on('click',()=>{
 				app.controller.moveTo('board','board_write');
 			});
-			$('.dropdown-menu a').eq(9).on('click',function(){
+			$('.dropdown-menu a').eq(9).on('click',()=>{
 				app.controller.moveTo('board','board_list');
 			});
-			$('.dropdown-menu a').eq(10).on('click',function(){
+			$('.dropdown-menu a').eq(10).on('click',()=>{
 				app.controller.moveTo('board','board_detail');
 			});
-			$('.dropdown-menu a').eq(11).on('click',function(){
+			$('.dropdown-menu a').eq(11).on('click',()=>{
 				
 			});
 			$('#arithBtn').click(()=>{
@@ -128,9 +143,9 @@ meta.navbar=(function(){
 				$('#container').append(compUI.div('content')).css({'width':'100%'});
 				$('#content').css({width:'50%',margin:'0 auto'});
 				$('#content').html(algoUI.series());
-				$('#start_txt').after(compUI.input('start','text'));
+				$('#start_txt').after(compUI.iTxt('start'));
 				$('#start').attr('placeholder','시작값');
-				$('#end_txt').after(compUI.input('end','text'));
+				$('#end_txt').after(compUI.iTxt('end'));
 				$('#end').attr('placeholder','끝값');
 				$('#result').before(compUI.input('resultBtn','button'));
 				$('#resultBtn').val('결과보기');
@@ -144,8 +159,8 @@ meta.navbar=(function(){
 			$('#switchBtn').click(()=>{
 				$('#container').empty();
 				$('#container').html(algoUI.series());
-				$('#start_txt').after(compUI.input('start','text'));
-				$('#end_txt').after(compUI.input('end','text'));
+				$('#start_txt').after(compUI.iTxt('start'));
+				$('#end_txt').after(compUI.iTxt('end'));
 				$('#result').before(compUI.input('resultBtn','button'));
 				$('#resultBtn').val('결과보기');
 				
@@ -161,8 +176,8 @@ meta.navbar=(function(){
 			$('#diffBtn').click(()=>{
 				$('#container').empty();
 				$('#container').html(algoUI.series());
-				$('#start_txt').after(compUI.input('start','text'));
-				$('#end_txt').after(compUI.input('end','text'));
+				$('#start_txt').after(compUI.iTxt('start'));
+				$('#end_txt').after(compUI.iTxt('end'));
 				$('#result').before(compUI.input('resultBtn','button'));
 				$('#resultBtn').val('결과보기');
 				
@@ -177,8 +192,8 @@ meta.navbar=(function(){
 			$('#facBtn').click(()=>{
 				$('#container').empty();
 				$('#container').html(algoUI.series());
-				$('#start_txt').after(compUI.input('start','text'));
-				$('#end_txt').after(compUI.input('end','text'));
+				$('#start_txt').after(compUI.iTxt('start'));
+				$('#end_txt').after(compUI.iTxt('end'));
 				$('#result').before(compUI.input('resultBtn','button'));
 				$('#resultBtn').val('결과보기');
 				
@@ -193,8 +208,8 @@ meta.navbar=(function(){
 			$('#fiboBtn').click(()=>{
 				$('#container').empty();
 				$('#container').html(algoUI.series());
-				$('#start_txt').after(compUI.input('start','text'));
-				$('#end_txt').after(compUI.input('end','text'));
+				$('#start_txt').after(compUI.iTxt('start'));
+				$('#end_txt').after(compUI.iTxt('end'));
 				$('#result').before(compUI.input('resultBtn','button'));
 				$('#resultBtn').val('결과보기');
 				
@@ -209,7 +224,7 @@ meta.navbar=(function(){
 			$('#selBtn').click(()=>{
 				$('#container').empty();
 				$('#container').html(algoUI.sort());
-				$('#input_txt').after(compUI.input('input_val','text'));
+				$('#input_txt').after(compUI.iTxt('input_val'));
 				$('#input_val').attr('placeholder','입력값');
 				$('#result').before(compUI.input('resultBtn','button'));
 				$('#resultBtn').val('결과보기');
@@ -232,7 +247,7 @@ meta.navbar=(function(){
 			$('#bubbleBtn').click(()=>{
 				$('#container').empty();
 				$('#container').html(algoUI.sort());
-				$('#input_txt').after(compUI.input('input_val','text'));
+				$('#input_txt').after(compUI.iTxt('input_val'));
 				$('#input_val').attr('placeholder','입력값');
 				$('#result').before(compUI.input('resultBtn','button'));
 				$('#resultBtn').val('결과보기');

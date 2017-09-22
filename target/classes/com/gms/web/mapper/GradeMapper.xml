@@ -22,7 +22,7 @@
 		</foreach>
 	</insert>
 	
-	<delete id="deleteMajor" parameterType="com.gms.web.command.CommandDTO">
+	<delete id="deleteMajor" parameterType="com.gms.web.command.Command">
 		DELETE FROM major WHERE member_id = #{search}
 	</delete>
 </mapper>

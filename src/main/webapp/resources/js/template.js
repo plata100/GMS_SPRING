@@ -17,25 +17,20 @@ var introUI={
 		+'    <ul class="nav navbar-nav">'
 		+'      <li class="active"><a ><span class="glyphicon glyphicon-home"></span>&nbsp;Home</a></li>'
 		+'      <li class="dropdown">'
-		+'          <a href="#" class="dropdown-toggle" '
-		+'          	aria-haspopup="true" '
-		+'          	aria-expanded="false">회원관리 <span class="caret">'
-		+'          	</span></a>'
+		+'          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">학생관리 <span class="caret"></span></a>'
 		+'          <ul id="navbar_ul_stu" class="dropdown-menu">'
 		+'            <li><a>학생추가</a></li>'
 		+'            <li><a>학생목록</a></li>'
 		+'            <li><a>학생조회</a></li>'
-		+'            <li></li>'
 		+'            <li><a>학생삭제</a></li>'
 		+'          </ul>'
-		+'        </li>'
+		+'      </li>'
 		+'      <li class="dropdown">'
 		+'          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">성적관리 <span class="caret"></span></a>'
 		+'          <ul id="navbar_ul_grade" class="dropdown-menu">'
 		+'            <li><a>성적추가</a></li>'
 		+'            <li><a>성적목록</a></li>'
 		+'            <li><a>성적조회</a></li>'
-		+'            <li></li>'
 		+'            <li><a>성적삭제</a></li>'
 		+'          </ul>'
 		+'        </li>'
@@ -45,7 +40,6 @@ var introUI={
 		+'           <li><a>게시글추가</a></li>'
 		+'            <li><a>게시글목록</a></li>'
 		+'            <li><a>게시글조회</a></li>'
-		+'            <li></li>'
 		+'            <li><a>게시글삭제</a></li>'
 		+'          </ul>'
 		+'        </li>'
@@ -84,7 +78,7 @@ var introUI={
 		+'            <li><a id="roundBtn">90도 회전</a></li>'
 		+'            <li><a id="snailBtn">달팽이(*)</a></li>'
 		+'            <li><a id="diagoBtn">대각선채우기</a></li>'
-		+'            <li><a id="masicBtn">마방진(*)</a></li>'
+		+'            <li><a id="magicBtn">마방진(*)</a></li>'
 		+'          </ul>'
 		+'        </li>'
 		+'    </ul>'
@@ -95,14 +89,60 @@ var introUI={
 	}
 };
 
+var bbsUI={
+	list : ()=> {
+		compUI.div('content').css({'width':'100%'});
+		$('#content').css({'width':'70%','margin':'0 auto'});
+		compUI.table('list-table').attr('border','1').css({'border-collapse':'collapse','width':'100%'}).appendTo($('#content'));
+		for(var i=0; i<5; i++) {
+			compUI.tr('list-tr-'+i).css({'height':'25px'}).appendTo($('#list-table'));
+			if(i==0) {
+				for(var j=0; j<5; j++) {
+					compUI.th('list-th-'+j).css({'text-align':'center'}).appendTo($('#list-tr-0'));	
+				}
+				$('#list-th-0').html('No').css({'width':'10%'});
+				$('#list-th-1').html('제목').css({'width':'40%'});
+				$('#list-th-2').html('글쓴이').css({'width':'15%'});
+				$('#list-th-3').html('작성날짜').css({'width':'25%'});
+				$('#list-th-4').html('조회수').css({'width':'10%'});
+			} else {
+				for(var j=0; j<5; j++) {
+					compUI.th('list-th-'+j).css({'text-align':'center'}).appendTo($('#list-tr-'+i));
+				}
+			}
+		}
+		$('#list-table').after(compUI.nav('pagi-nav').attr('aria-label','Page navigation').css({width:'400px',margin:'0 auto'}));
+		compUI.ul('pagi-ui').addClass('pagination').appendTo($('#pagi-nav'));
+		for(var i=0; i<5; i++) {
+			compUI.li('pagi-ui-li-'+i).appendTo($('#pagi-ui'));
+			$('#pagi-ui-li-'+i).append(compUI.a('pagi-ui-li-a-'+i));
+		};
+		compUI.span('pagi-ui-li-a-0-span').addClass('glyphicon glyphicon-step-backward').attr('aria-hidden','true').appendTo($('#pagi-ui-li-a-0'));
+		compUI.span('pagi-ui-li-a-1-span').addClass('glyphicon glyphicon-chevron-left').attr('aria-hidden','true').appendTo($('#pagi-ui-li-a-1'));
+		compUI.span('pagi-ui-li-a-2-span').appendTo($('#pagi-ui-li-a-2'));
+		compUI.span('pagi-ui-li-a-3-span').addClass('glyphicon glyphicon-chevron-right').attr('aria-hidden','true').appendTo($('#pagi-ui-li-a-3'));
+		compUI.span('pagi-ui-li-a-4-span').addClass('glyphicon glyphicon-step-forward').attr('aria-hidden','true').appendTo($('#pagi-ui-li-a-4'));		
+	}
+}
+
 var compUI={
+	a : x=>{return $('<a/>',{id:x});},
+	br : ()=>{return $('<br/>')},
 	div : x=>{return $('<div/>',{id:x});},
-	image : (x,y)=>{return $('<img/>',{id:x,src:y});},
-	input : (x,y)=>{return $('<input/>',{id:x,type:y});},
 	h1 : x=>{return $('<h1/>',{id:x});},
-	h2 : x=>{return $('<h1/>',{id:x});},
-	h3 : x=>{return $('<h1/>',{id:x});},
-	span : x=>{return $('<span/>',{id:x});}
+	span : x=>{return $('<span/>',{id:x});},
+	image : (x,y)=>{return $('<img/>',{id:x,src:y});},
+	iTxt : x=>{return $('<input/>',{id:x, type:'text'})},
+	aBtn : x=>{return $('<a/>',{href:'#', role:'button', id:x})},
+	iBtn : x=>{return $('<input/>',{id:x, type:'button'})},
+	input : (x,y)=>{return $('<input/>',{id:x,type:y});},
+	table : (x)=>{return $('<table/>',{id:x})},
+	th : x=>{return $('<th/>',{id:x})},
+	tr : x=>{return $('<tr/>',{id:x})},
+	td : x=>{return $('<td/>',{id:x})},	
+	ul : x=>{return $('<ul/>',{id:x})},
+	li : x=>{return $('<li/>',{id:x})},
+	nav : x=>{return $('<nav/>',{id:x})}
 };
 
 var algoUI={
