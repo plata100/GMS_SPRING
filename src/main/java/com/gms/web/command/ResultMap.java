@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import lombok.Data;
 
 @Component @Lazy @Data
-public class RespMap {
-	private String id, title, content, regdate, email, profile, birthday, gender;
-	private int resp, hitcount;
+public class ResultMap {
+	private String id, title, content, regdate, email, profile, birthday, gender, seq, hitcount, count;
 }

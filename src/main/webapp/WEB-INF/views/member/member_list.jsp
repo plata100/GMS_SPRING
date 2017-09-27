@@ -46,41 +46,34 @@
 	</table>
 	<nav aria-label="Page navigation" style="width:400px;margin: 0 auto;">
 	  <ul class="pagination">
-	  	<c:if test="${prevBlock gt 0 }">
 	    <li>
-	    	<a onclick="app.member.list('1')">
+	    	<a>
 	    		<span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
 	    	</a>
 	    </li>
 	    <li>
-	      <a onclick="app.member.list('${startPage-1}')" aria-label="Previous">
+	      <a aria-label="Previous">
 	        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
 	      </a>
 	    </li>
-	    </c:if>
-	    <c:forEach varStatus="i" begin="${startPage}" end="${endPage}" step="1">
-	    	<c:choose>
-	    		<c:when test="${i.index eq pageNumber}">
-	    			<li class="active"><a href="#">${i.index}</a></li>
-	    		</c:when>
-	    		<c:otherwise>
-	    			<li ><a href="#" onclick="app.member.list('${i.index}')">
-	    				${i.index}</a></li>
-	    		</c:otherwise>
-	    	</c:choose>
-	    </c:forEach>
-	    <c:if test="${nextBlock le theNumberOfPages}">
-	    	<li>
-		      	<a onclick="app.member.list('${endPage+1}')">
-		        	<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-		      	</a>
-		    </li>
-	    	<li>	
-	    		<a onclick="app.member.list('${theNumberOfPages}')" >
-	    			<span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
-	    		</a>
-	    	</li>
-	    </c:if>
+		<li class="active">
+			<a>
+			</a>
+		</li>
+	    <li >
+	    	<a>
+	    	</a>
+	    </li>
+    	<li>
+	      	<a>
+	        	<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+	      	</a>
+	    </li>
+    	<li>	
+    		<a>
+    			<span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
+    		</a>
+    	</li>
 	  </ul>
 	</nav>
 </div>
